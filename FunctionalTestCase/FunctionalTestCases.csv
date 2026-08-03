@@ -1,1 +1,48 @@
-Test Case ID,Module,Scenario,Precondition,Test Steps,Expected Result,Priority,Type,Status
+TC ID,Module,Requirement ID,Priority,Test Type,Suite,Preconditions,Test Data,Test Steps,Expected Result,Status
+TC-001,User / Authentication,"FR-01, FR-02, FR-03, FR-04",High,Functional,@Smoke,"Toolshop UI is reachable at `https://practicesoftwaretesting.com/`; no active user session","First name: `John`; Last name: `Doe`; Email: `testuser+{timestamp}@example.com`; Password: `Welcome1!`; DOB: `1990-05-15`; Phone: `5551234567`","1. Navigate to the Registration page.
+2. Complete all required fields using the test data.
+3. Submit the registration form.
+4. Navigate to the Login page.
+5. Log in with the registered email and password.
+6. Open the user Profile page.","Registration completes successfully; user is logged in; profile displays `John`, `Doe`, registered email, DOB `1990-05-15`, and phone matching registration input",Passed
+TC-002,End-to-End Purchase Journey,"FR-02, FR-07, FR-10, FR-11, FR-13, FR-14, FR-15, FR-16, FR-17",High,Functional,@Smoke,"A valid registered user account exists and the user is logged in. Cart is empty before execution.","Login: credentials from TC-001 registration; Products: two distinct catalog items (e.g. `Pliers`, `Hammer`); Cart quantity after update: `2` for one item; Billing street: `Zoey Shore`; City: `Hesselbury`; State: `Florida`; Country: `TG`; Postal code: `1234AA`; Payment: Cash on Delivery","1. Log in with registered credentials.
+2. Browse the product catalog and add two distinct products to the cart.
+3. Open the cart and update quantity of one product to `2`.
+4. Proceed to checkout.
+5. Enter billing details and select Cash on Delivery.
+6. Click Confirm once, then click Confirm a second time.
+7. Navigate to My Invoices.
+8. Open the latest invoice and review line items and totals.","Checkout completes with COD; invoice is generated after double Confirm; invoice appears under My Invoices with correct billing address, two line items, updated quantity reflected, and accurate totals",Passed
+TC-003,Product Catalog,"FR-07, FR-08, FR-09",Medium,Functional,@Regression,User logged in; product catalog page accessible,"Search keyword: `Pliers`; Filter brand: value from live catalog (e.g. `ForgeFlex`); Filter category: value from live catalog (e.g. `Hand Tools`); Price range: catalog-supported `between` values; Sort: `name,asc` or equivalent UI option","1. Log in with valid credentials.
+2. Navigate to the Products page.
+3. Enter `Pliers` in the search field and submit.
+4. Verify search results contain matching products.
+5. Clear search and apply a brand filter from the catalog.
+6. Verify all displayed products match the selected brand.
+7. Apply a category filter and verify results match the selected category.
+8. Apply a price range filter and sort order; verify results respect both criteria.","Search returns products matching the keyword; each applied filter updates the listing and all visible products conform to the selected brand, category, price range, and sort order",Passed
+TC-004,Shopping Cart,"FR-11, FR-12",Medium,Functional,@Regression,User logged in; cart is empty at start,"Login: valid registered user; Product: one catalog item (e.g. `Combination Pliers`); Initial quantity: `1`; Updated quantity: `3`","1. Log in with valid credentials.
+2. Add one product to the cart from the product listing or detail page.
+3. Open the cart and confirm the product appears with quantity `1`.
+4. Increase quantity to `3` using cart controls.
+5. Refresh or re-open the cart page.
+6. Verify cart line item count and subtotal.","Product is added to cart; quantity update persists as `3`; cart displays correct product name, quantity, and updated line total",Passed
+TC-005,Favorites,FR-07,Medium,Functional,@Regression,User logged in; product catalog accessible; Favorites list is empty or known baseline,"Login: valid registered user; Product: one catalog item selected at runtime (e.g. first visible product on Products page)","1. Log in with valid credentials.
+2. Navigate to the Products page and open a product detail page.
+3. Add the product to Favorites.
+4. Navigate to the Favorites page.
+5. Verify the product appears in the Favorites list.
+6. Remove the product from Favorites.
+7. Verify the Favorites list no longer contains the product.","Product is successfully added to Favorites while authenticated; product is visible on the Favorites page; after removal, the product is no longer listed in Favorites",Passed
+TC-006,Contact,"FR-18, FR-19",High,Functional,@Regression,Toolshop UI is reachable; no login required,"Name: `QA Tester`; Email: `contact+{timestamp}@example.com`; Subject: `Order inquiry`; Message: `Testing contact form submission for assessment.`","1. Navigate to the Contact page.
+2. Enter name, email, subject, and message using the test data.
+3. Submit the contact form.
+4. Observe the confirmation response on the page.","Form submits without error; user receives a visible success confirmation message",Passed
+TC-007,User / Authentication,"FR-05, FR-06",High,Functional,@Smoke,User registered and logged in with valid credentials,"Email: `testuser+{timestamp}@example.com`; Password: `Welcome1!`","1. Confirm authenticated access (e.g. open Profile or My Invoices).
+2. Click Logout.
+3. Attempt to access a protected page (e.g. Profile or My Invoices).
+4. Attempt to perform an action requiring authentication.","Logout completes successfully; session is terminated; protected pages redirect to login or deny access without a valid session",Passed
+TC-008,Shopping Cart / Checkout,FR-13,Medium,Negative,@Regression,User logged in; cart contains no items,"Login: valid registered user; Cart state: empty (no products added)","1. Log in with valid credentials.
+2. Open the cart and confirm it is empty.
+3. Attempt to navigate to checkout directly or via checkout button.
+4. Observe system behaviour and any validation messages.","Checkout is blocked or prevented when the cart is empty; no invoice is generated; no invoice is created under My Invoices; user is informed that checkout requires items in the cart",Passed
