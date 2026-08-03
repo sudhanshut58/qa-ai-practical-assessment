@@ -1,0 +1,18 @@
+{
+  "name": "prismstructure-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright automation framework for the QA AI Practical Assessment",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --project=ui",
+    "test:api": "playwright test --project=api",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "dotenv": "^16.4.7"
+  }
+}
