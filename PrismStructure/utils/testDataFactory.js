@@ -1,4 +1,4 @@
-const DEFAULT_PASSWORD = 'Welcome1!';
+const DEFAULT_PASSWORD = 'Pr1sm!Test2026';
 const DEFAULT_DATE_OF_BIRTH = '1990-05-15';
 const DEFAULT_PHONE = '5551234567';
 

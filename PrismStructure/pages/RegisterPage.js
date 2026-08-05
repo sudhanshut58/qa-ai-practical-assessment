@@ -24,6 +24,7 @@ class RegisterPage {
     this.emailInput = page.locator('[data-test="email"]');
     this.passwordInput = page.locator('[data-test="password"]');
     this.registerButton = page.locator('[data-test="register-submit"]');
+    this.signInNav = page.locator('[data-test="nav-sign-in"]');
   }
 
   async open() {
@@ -43,7 +44,21 @@ class RegisterPage {
     await this.phoneInput.fill(user.phone);
     await this.emailInput.fill(user.email);
     await this.passwordInput.fill(user.password);
+
+    const registerResponsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/users/register') &&
+        response.request().method() === 'POST' &&
+        response.status() === 201
+    );
+
     await this.registerButton.click();
+    await registerResponsePromise;
+    await Promise.race([
+      this.page.waitForURL('**/account'),
+      this.page.waitForURL('**/auth/login'),
+      this.signInNav.waitFor({ state: 'hidden' }),
+    ]);
   }
 }
 
